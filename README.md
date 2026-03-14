@@ -2,8 +2,9 @@
 
 A full-stack SaaS web application for customer support ticket management. Built as part of a technical hiring assessment.
 
-**Live URL:** flowdesk-flvjyprhu-aditi5784s-projects.vercel.app
-**Admin Portal:** flowdesk-flvjyprhu-aditi5784s-projects.vercel.appadmin/login
+**Live URL:** https://flowdesk-flvjyprhu-aditi5784s-projects.vercel.app
+
+**Admin Portal:** https://flowdesk-flvjyprhu-aditi5784s-projects.vercel.appadmin/login
 
 ---
 
@@ -61,7 +62,7 @@ A full-stack SaaS web application for customer support ticket management. Built 
 
 **1. Clone the repo**
 ```bash
-git clone https://github.com/tumhara-username/flowdesk.git
+git clone https://github.com/your-username/flowdesk.git
 cd flowdesk
 ```
 
