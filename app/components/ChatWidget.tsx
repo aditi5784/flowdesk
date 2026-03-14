@@ -8,15 +8,24 @@ export default function ChatWidget() {
   ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const [sessionId] = useState(() => Math.random().toString(36).substring(2) + Date.now().toString(36))
+  const [sessionId, setSessionId] = useState<string | null>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const createSession = async () => {
+      const res = await fetch('/api/chat-session', { method: 'POST' })
+      const data = await res.json()
+      setSessionId(data.sessionId)
+    }
+    createSession()
+  }, [])
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
   const send = async () => {
-    if (!input.trim() || loading) return
+    if (!input.trim() || loading || !sessionId) return
     const userMsg = { role: 'user', content: input }
     const newMessages = [...messages, userMsg]
     setMessages(newMessages)

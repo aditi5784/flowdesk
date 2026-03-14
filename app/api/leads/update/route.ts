@@ -3,21 +3,16 @@ import { createClient } from '@/lib/supabase/server'
 
 export async function POST(req: Request) {
   try {
-    const data = await req.json()
+    const { id, status } = await req.json()
     const supabase = await createClient()
     
-    const { error } = await supabase.from('leads').insert({
-      full_name: data.full_name,
-      email: data.email,
-      company_name: data.company_name,
-      phone: data.phone,
-      company_size: data.company_size,
-      message: data.message,
-      status: 'New'
-    })
+    const { error } = await supabase
+      .from('leads')
+      .update({ status: status })
+      .eq('id', id)
     
     if (error) {
-      console.error('Lead insert error:', error)
+      console.error('Update error:', error)
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
     
