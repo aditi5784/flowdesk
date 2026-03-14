@@ -9,7 +9,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const isLogin = pathname === '/admin/login'
 
   const logout = async () => {
-    const supabase = await createClient()
+    const supabase = createClient()
     await supabase.auth.signOut()
     router.push('/admin/login')
   }
