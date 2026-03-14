@@ -4,7 +4,7 @@ A full-stack SaaS web application for customer support ticket management. Built 
 
 **Live URL:** https://flowdesk-flvjyprhu-aditi5784s-projects.vercel.app
 
-**Admin Portal:** https://flowdesk-flvjyprhu-aditi5784s-projects.vercel.appadmin/login
+**Admin Portal:** https://flowdesk-flvjyprhu-aditi5784s-projects.vercel.app/admin/login
 
 ---
 
