@@ -24,6 +24,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {[
             { href: '/admin/dashboard', label: 'Leads' },
             { href: '/admin/conversations', label: 'Conversations' },
+            { href: '/admin/team', label: 'Team' },
           ].map(({ href, label }) => (
             <Link key={href} href={href}
               className={`block px-4 py-2 rounded-lg text-sm transition ${
