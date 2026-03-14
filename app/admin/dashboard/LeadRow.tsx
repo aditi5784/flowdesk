@@ -33,7 +33,13 @@ export default function LeadRow({ lead, isAdmin }: { lead: any, isAdmin: boolean
         <td className="py-3 px-4 text-gray-500">{lead.email}</td>
         <td className="py-3 px-4">{lead.company_name}</td>
         <td className="py-3 px-4 text-gray-500">{lead.company_size}</td>
-        <td className="py-3 px-4 text-gray-500">{new Date(lead.created_at).toLocaleDateString()}</td>
+        <td className="py-3 px-4 text-gray-500">
+  {new Date(lead.created_at).toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit', 
+    year: 'numeric'
+  })}
+</td>
         <td className="py-3 px-4" onClick={e => e.stopPropagation()}>
           {isAdmin ? (
             <select value={status} onChange={e => updateStatus(e.target.value)}
