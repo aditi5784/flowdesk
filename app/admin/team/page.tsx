@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation'
 
 export default function TeamPage() {
   const [members, setMembers] = useState<any[]>([])
-  const [role, setRole] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -25,18 +26,19 @@ export default function TeamPage() {
         return
       }
 
-      setRole(profile.role)
+      setIsAdmin(true)
       const { data } = await supabase.from('profiles').select('*')
       setMembers(data || [])
+      setLoading(false)
     }
     load()
   }, [])
 
-  const removeUser = async (id: string) => {
-    const supabase = createClient()
-    await supabase.from('profiles').delete().eq('id', id)
-    setMembers(prev => prev.filter(m => m.id !== id))
-  }
+  if (loading) return (
+    <div className="flex items-center justify-center h-64">
+      <div className="text-gray-400">Loading...</div>
+    </div>
+  )
 
   return (
     <div>
@@ -79,4 +81,10 @@ export default function TeamPage() {
       </div>
     </div>
   )
+
+  async function removeUser(id: string) {
+    const supabase = createClient()
+    await supabase.from('profiles').delete().eq('id', id)
+    setMembers(prev => prev.filter(m => m.id !== id))
+  }
 }
