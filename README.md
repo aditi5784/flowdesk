@@ -1,6 +1,6 @@
 # Flowdesk
 
-A full-stack SaaS web application for customer support ticket management. Built as part of a technical hiring assessment.
+A full-stack SaaS web application for customer support ticket management. 
 
 **Live URL:** https://flowdesk-flvjyprhu-aditi5784s-projects.vercel.app
 
@@ -56,7 +56,7 @@ A full-stack SaaS web application for customer support ticket management. Built 
 ### Prerequisites
 - Node.js 18+
 - A Supabase account
-- A Groq API key (free at groq.com)
+- A Groq API key 
 
 ### Setup
 
