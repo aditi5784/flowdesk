@@ -11,15 +11,6 @@ export default function ChatWidget() {
   const [sessionId, setSessionId] = useState<string | null>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const createSession = async () => {
-      const res = await fetch('/api/chat-session', { method: 'POST' })
-      const data = await res.json()
-      setSessionId(data.sessionId)
-    }
-    createSession()
-  }, [])
-
   const send = async () => {
   if (!input.trim() || loading) return
   
