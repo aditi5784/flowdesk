@@ -20,27 +20,32 @@ export default function ChatWidget() {
     createSession()
   }, [])
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
-
   const send = async () => {
-    if (!input.trim() || loading || !sessionId) return
-    const userMsg = { role: 'user', content: input }
-    const newMessages = [...messages, userMsg]
-    setMessages(newMessages)
-    setInput('')
-    setLoading(true)
-
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: newMessages, sessionId })
-    })
+  if (!input.trim() || loading) return
+  
+  let currentSessionId = sessionId
+  if (!currentSessionId) {
+    const res = await fetch('/api/chat-session', { method: 'POST' })
     const data = await res.json()
-    setMessages(prev => [...prev, { role: 'assistant', content: data.content }])
-    setLoading(false)
+    currentSessionId = data.sessionId
+    setSessionId(currentSessionId)
   }
+
+  const userMsg = { role: 'user', content: input }
+  const newMessages = [...messages, userMsg]
+  setMessages(newMessages)
+  setInput('')
+  setLoading(true)
+
+  const res = await fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages: newMessages, sessionId: currentSessionId })
+  })
+  const data = await res.json()
+  setMessages(prev => [...prev, { role: 'assistant', content: data.content }])
+  setLoading(false)
+}
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
